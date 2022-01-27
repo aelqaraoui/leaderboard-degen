@@ -3,6 +3,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const cors = require('cors');
+app.use(cors({
+    origin: '*'
+}));
+
 query = `
         select 
             date_trunc('minute', to_timestamp(block_timestamp/1000/1000/1000)) as time,
