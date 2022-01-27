@@ -29,6 +29,11 @@ app.get('/', (req, result) => {
     })
 
     pool.query(query, (err, res) => {
+        if(!res)
+        {
+            result.json([]);
+        }
+
         let arr = res.rows.filter((val)=>val.receiver === 'coin-flip.woothugg.near').map((val)=>val.signer).filter((val)=>val !== 'coin-flip.woothugg.near')
         const counts = {};
     
