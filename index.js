@@ -58,5 +58,5 @@ app.get('/', (req, result) => {
 })
 
 app.listen(process.env.PORT || port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`${port}`)
 })
