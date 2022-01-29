@@ -8,7 +8,7 @@ app.use(cors({
     origin: '*'
 }));
 
-app.use('/', indexer);
+app.use('/api/indexer', indexer);
 
 app.listen(process.env.PORT || port, () => {
   console.log(`${port}`)
