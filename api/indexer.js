@@ -24,32 +24,34 @@ router.get('/', (req, result) => {
 
     pool.query(query, (err, res) => {
         if(!res) {
-            console.log(err)
-            res.end();
-            result.end();
-        }
 
-        console.log(!res);
-        let arr = res.rows.filter((val)=>val.receiver === 'coin-flip.woothugg.near').map((val)=>val.signer).filter((val)=>val !== 'coin-flip.woothugg.near')
-        const counts = {};
-    
-        for (const num of arr) {
-            counts[num] = counts[num] ? counts[num] + 1 : 1;
         }
-        console.log(counts)
-    
-        let items = Object.keys(counts).map(function(key) {
-            return [key, counts[key]];
-        });
+        else {
+
         
-        items.sort(function(first, second) {
-            return second[1] - first[1];
-        });
-    
-        console.log(items);
+            console.log(!res);
+            let arr = res.rows.filter((val)=>val.receiver === 'coin-flip.woothugg.near').map((val)=>val.signer).filter((val)=>val !== 'coin-flip.woothugg.near')
+            const counts = {};
         
+            for (const num of arr) {
+                counts[num] = counts[num] ? counts[num] + 1 : 1;
+            }
+            console.log(counts)
+        
+            let items = Object.keys(counts).map(function(key) {
+                return [key, counts[key]];
+            });
+            
+            items.sort(function(first, second) {
+                return second[1] - first[1];
+            });
+        
+            console.log(items);
+            
+            
+            result.json(items);
+        }
         pool.end() 
-        result.json(items);
     })
 })
 
