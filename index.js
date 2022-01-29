@@ -30,7 +30,7 @@ app.get('/', (req, result) => {
 
     pool.query(query, (err, res) => {
         if(res === undefined) {
-        {
+        
             result.json([]);
         }
 
