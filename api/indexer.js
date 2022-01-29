@@ -24,7 +24,7 @@ router.get('/', (req, result) => {
 
     pool.query(query, (err, res) => {
         if(!res) {
-
+            result.json([])
         }
         else {
 
