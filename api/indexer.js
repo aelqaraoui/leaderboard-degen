@@ -24,13 +24,14 @@ router.get('/', (req, result) => {
 
     pool.query(query, (err, res) => {
         if(!res) {
+            console.log(err)
             result.json([])
         }
         else {
 
         
-            console.log(!res);
-            let arr = res.rows.filter((val)=>val.receiver === 'coin-flip.woothugg.near').map((val)=>val.signer).filter((val)=>val !== 'coin-flip.woothugg.near')
+            console.log(res.rows);
+            let arr = res.rows.filter((val)=>val.receiver === 'coin-flip.woothugg.near').filter((val)=>val.signer !== 'okonomiyaki.near' && val.signer !== 'xkcdfan.near' && val.signer !== '1x1x1.near').map((val)=>val.signer).filter((val)=>val !== 'coin-flip.woothugg.near')
             const counts = {};
         
             for (const num of arr) {
@@ -45,9 +46,7 @@ router.get('/', (req, result) => {
             items.sort(function(first, second) {
                 return second[1] - first[1];
             });
-        
-            console.log(items);
-            
+
             
             result.json(items);
         }
