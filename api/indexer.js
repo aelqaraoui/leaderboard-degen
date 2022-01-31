@@ -31,7 +31,7 @@ router.get('/', (req, result) => {
 
         
             console.log(res.rows);
-            let arr = res.rows.filter((val)=>val.receiver === 'coin-flip.woothugg.near').filter((val)=>val.signer !== 'okonomiyaki.near' && val.signer !== 'xkcdfan.near' && val.signer !== '1x1x1.near').map((val)=>val.signer).filter((val)=>val !== 'coin-flip.woothugg.near')
+            let arr = res.rows.filter((val)=>val.receiver === 'coin-flip.woothugg.near').filter((val)=>val.signer !== 'okonomiyaki.near' && val.signer !== 'xkcdfan.near' && val.signer !== '1x1x1.near').map((val)=>{if(val.signer.length < 30){return val.signer}else{return val.signer.slice(0, 5) + '...' + val.signer.slice(val.signer.length-7, val.signer.length-1)}}).filter((val)=>val !== 'coin-flip.woothugg.near')
             const counts = {};
         
             for (const num of arr) {
